@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300&family=Ubuntu&display=swap');
+.background_image{
+    font-family: 'Ubuntu', sans-serif;
+    height: 99vh;
+}
+.right_column{
+    padding: 90px 40px ;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    
+}
+.user_name{
+    margin-bottom: 40px !important;
+}
+
+.node_image{
+    width: 90%;
+    height: auto;
+}
+.myEmosi_logo{
+    width: 30%;
+}
+.login_text{
+    display: flex;
+    justify-content: center;
+}
+.display_left_column{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 102.3vh;
+    background-color: #E32C58;
+   
+}
+@media only screen and (max-width: 600px) {
+    .display_left_column{   
+        display: none;
+    }
+    .right_column{
+        padding: 50px 20px 10px 20px ;
+    }
+  }
+  @media only screen and (max-width: 900px ) and (min-width: 600px) {
+    .display_left_column{   
+        display: none;
+    }
+    .right_column{
+        padding: 5px 50px 10px 50px ;
+    }
+  }
+

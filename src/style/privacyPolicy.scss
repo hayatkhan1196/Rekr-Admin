@@ -1,0 +1,17 @@
+@import './dashboard';
+.privacy_div{
+    @include main_div();
+
+}
+.privacy_policy{
+   
+    background-color: #ffff;
+    border-radius: 5px;
+}
+.privacy_image{
+    width: 60%;
+    height: auto;
+    display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

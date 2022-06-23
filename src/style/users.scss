@@ -1,0 +1,22 @@
+@import './dashboard';
+.users_div{
+    @include main_div();
+    @media only screen and (max-width: 600px) {
+        height: 100vh;
+     }
+}
+.user_head{
+    background-color: #ffff;
+    padding: 20px;
+    border-radius: 4px;
+}
+.users_data{
+        background: #fffF;
+        margin-bottom: 40px;
+        border-radius: 4px;
+        height: 87vh;
+        overflow: auto;
+        @media only screen and (max-width: 600px) {
+           height: 100vh;
+        }
+}

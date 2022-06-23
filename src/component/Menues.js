@@ -1,0 +1,82 @@
+import React from "react";
+import { Link } from "react-router-dom";
+import List from "@mui/material/List";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import PrivacyTipRoundedIcon from "@mui/icons-material/PrivacyTipRounded";
+import GroupRoundedIcon from '@mui/icons-material/GroupRounded';
+import "../style/home.scss";
+import NoteAltIcon from '@mui/icons-material/NoteAlt';
+import BookOnlineIcon from '@mui/icons-material/BookOnline';
+
+const Menues = () => {
+  return (
+    <div>
+      <List
+        sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+        component="nav"
+        aria-labelledby="nested-list-subheader"
+      >
+        {/* <Link to="/home" style={{ textDecoration: "none", color: "black" }}>
+          <ListItemButton color="red" className="menu_background">
+            <ListItemIcon>
+              <GridViewRoundedIcon sx={{ color: "#D60B52" }} />
+            </ListItemIcon>
+            <ListItemText primary="Dashboard" style={{ color: "#662483" }} />
+          </ListItemButton>
+        </Link> */}
+        <Link
+          to="/users"
+          style={{ textDecoration: "none", color: "black" }}
+        >
+          <ListItemButton className="menu_background">
+            <ListItemIcon>
+              <GroupRoundedIcon sx={{ color: "black" }} />
+            </ListItemIcon>
+            <ListItemText primary="Users" style={{ color: "black" }} />
+          </ListItemButton>
+        </Link>
+        <Link
+          to="/booking"
+          style={{ textDecoration: "none", color: "black" }}
+        >
+          <ListItemButton className="menu_background">
+            <ListItemIcon>
+            <BookOnlineIcon sx={{ color: "black" }} />
+            </ListItemIcon>
+            <ListItemText primary="Booking" style={{ color: "black" }} />
+          </ListItemButton>
+        </Link>
+
+        <Link
+          to="/privacy-policy"
+          style={{ textDecoration: "none", color: "black" }}
+        >
+          <ListItemButton className="menu_background">
+            <ListItemIcon>
+              <PrivacyTipRoundedIcon sx={{ color: "black" }} />
+            </ListItemIcon>
+            <ListItemText primary="Privacy Policy" style={{ color: "black" }} />
+          </ListItemButton>
+        </Link>
+        <Link
+          to="/terms-and-conditions"
+          style={{ textDecoration: "none", color: "black" }}
+        >
+          <ListItemButton className="menu_background">
+            <ListItemIcon>
+              <NoteAltIcon sx={{ color: "black" }} />
+            </ListItemIcon>
+            <ListItemText primary="Terms & Conditions" style={{ color: "black" }} />
+          </ListItemButton>
+        </Link>
+
+
+
+      </List>
+    </div>
+  );
+};
+
+export default Menues;
