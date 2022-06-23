@@ -28,18 +28,15 @@ const Users = () => {
     });
   
 
-    // const updatedList = list.filter((items) =>
-    //   items.Coach == false
-
-    // )
+    
     setUsers(list)
-    // setLoading(false)
+   
   };
 
   useEffect(() => {
-    // if(!openPopup){
+   
     getAllUsers()
-    // }
+   
   }, [])
 
 
