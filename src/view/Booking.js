@@ -146,16 +146,7 @@ let allList=[]
             Type
               </Typography>
             </Grid>
-            {/* <Grid item xs={1.5}>
-              <Typography
-                variant="h6"
-                component="div"
-                gutterBottom
-                style={{ textAlign: "center" }}
-              >
-              Date
-              </Typography>
-            </Grid> */}
+            
             <Grid item xs={1.5}>
               <Typography
                 variant="h6"
@@ -182,11 +173,7 @@ let allList=[]
               <div>
                 <Divider className="food_detail" />
                 <Grid container spacing={2} key={index}>
-                  {/* <Grid item xs={2}>
-                    <Typography variant="body1" component="div" gutterBottom>
-                      {item.userId}
-                    </Typography>
-                  </Grid> */}
+                  
                   <Grid item xs={1.5}>
                     <span style={{ display: "flex", alignItems: "center" }}>
                       <Avatar
