@@ -26,11 +26,7 @@ const Users = () => {
         ...doc.data()
       })
     });
-  
-
-    
     setUsers(list)
-   
   };
 
   useEffect(() => {
@@ -38,7 +34,6 @@ const Users = () => {
     getAllUsers()
    
   }, [])
-
 
   return (
     <div className="users_div">
@@ -53,11 +48,7 @@ USERS          </Typography>
 
         <div style={{ padding: "25px" }}>
           <Grid container spacing={2}>
-            {/* <Grid item xs={2}>
-              <Typography variant="h6" component="div" gutterBottom>
-                User ID
-              </Typography>
-            </Grid> */}
+           
             <Grid item xs={2.4}>
               <Typography variant="h6" component="div" gutterBottom>
                 User Image
@@ -99,11 +90,7 @@ USERS          </Typography>
               <div>
                 <Divider className="food_detail" />
                 <Grid container spacing={2} key={item.id}>
-                  {/* <Grid item xs={2}>
-                    <Typography variant="body1" component="div" gutterBottom>
-                      {item.userId}
-                    </Typography>
-                  </Grid> */}
+                 
                   <Grid item xs={2.4}>
                     <span style={{ display: "flex", alignItems: "center" }}>
                       <Avatar
