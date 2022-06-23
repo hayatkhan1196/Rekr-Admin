@@ -1,54 +1,79 @@
 import React, { useState, useEffect } from "react";
 import Sidebars from "../component/Sidebars";
 import "../style/users.scss";
-import { userContent } from "../component/UserData";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
 import Avatar from "@mui/material/Avatar";
 import Grid from "@mui/material/Grid";
 import { Link } from "react-router-dom";
-// import { useParams } from "react-router-dom";
-
 import { getService } from '../services/Services';
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../config/firebase/firebase";
 
-const Booking = () => { 
-  // const params = useParams();
-  // const { id } = params;
+const Booking = () => {
   const [users, setUsers] = useState([])
-  // const [data, setData] = useState([])
+  const [booking, setBooking] = useState([])
+  const [final,setFinal]=useState([])
 
-  // useEffect(() => {
-  //   // declare the data fetching function
-  //   if (id) {
-  //     const handelFetch = async () => {
-  //       // setLoading(true)
-  //       const docRef = doc(db, "users", id);
-  //       const docSnap = await getDoc(docRef);
+  const getUsersAndBookingData=()=>{
+    let array=[]
+  booking.map((item)=>{
+    users.map((user)=>{
 
-  //       if (docSnap.exists()) {
-  //         console.log("Document data:", docSnap.data());
-  //         setData(docSnap.data())
-  //         // setLoading(false)
+      if(item.BookedBy == user.id){
+           item.BookedBy =user.firstname
+           item.id=user.id
+           item.number=user.number
+     array.push( item)
 
-  //       } else {
-  //         console.log("No such document!");
-  //         // setLoading(false)
-  //       }
+      } else if(item.RecievedBy == user.id){
+        item.RecievedBy = user.firstname
+        item.id=user.id
+        item.number=user.number
+        array.push(item)
+      }
 
-  //     };
-  //     // call the function
-  //     handelFetch()
-  //       // make sure to catch any error
-  //       .catch(console.error);
-  //   }
-  // }, [id])
+    })
+    
+  })
+  setFinal(array);
+
+  }
+
+  let list1 = []
+  const getAllUsers1 = async () => {
+
+    const querySnapshot = await getService("users")
+
+    querySnapshot.forEach((doc) => {
+
+      list1.push({
+        id: doc.id,
+
+        ...doc.data()
+      })
+    });
+    setUsers(list1) 
+
+  };
+
+  useEffect(() => {
+    
+    if(users && booking){
+      getUsersAndBookingData()
+    }
+  }, [ users,booking])
+
+
+  useEffect(() => { 
+    getAllUsers1()
+    getAllBooking()
+   
+  }, [])
+
   
 let allList=[]
   let list = []
-  const getAllUsers = async () => {
+  const getAllBooking = async () => {
 
     const querySnapshot = await getService("Bookings")
 
@@ -64,23 +89,13 @@ let allList=[]
       item?.Bookings.map((subitems) => {
        
           allList.push(subitems)
-       
-       
       })
-     
       
     })
-    setUsers(allList)
+    setBooking(allList)
+   
     
   };
-
-  useEffect(() => {
-    // if(!openPopup){
-    getAllUsers()
-    // }
-  }, [])
-
-  
 
   return (
     <div className="users_div">
@@ -95,11 +110,7 @@ let allList=[]
 
         <div style={{ padding: "25px" }}>
           <Grid container spacing={2}>
-            {/* <Grid item xs={2}>
-              <Typography variant="h6" component="div" gutterBottom>
-                User ID
-              </Typography>
-            </Grid> */}
+           
             <Grid item xs={1.5}>
               <Typography variant="h6" component="div" gutterBottom>
                Image
@@ -107,12 +118,12 @@ let allList=[]
             </Grid>
             <Grid item xs={1.5}>
               <Typography variant="h6" component="div" gutterBottom>
-               Name
+               BookedBy
               </Typography>
             </Grid>
             <Grid item xs={1.5}>
               <Typography variant="h6" component="div" gutterBottom>
-Service              </Typography>
+              RecievedBy             </Typography>
             </Grid>
       
             <Grid item xs={1.5}>
@@ -135,7 +146,7 @@ Service              </Typography>
             Type
               </Typography>
             </Grid>
-            <Grid item xs={1.5}>
+            {/* <Grid item xs={1.5}>
               <Typography
                 variant="h6"
                 component="div"
@@ -144,7 +155,7 @@ Service              </Typography>
               >
               Date
               </Typography>
-            </Grid>
+            </Grid> */}
             <Grid item xs={1.5}>
               <Typography
                 variant="h6"
@@ -152,11 +163,21 @@ Service              </Typography>
                 gutterBottom
                 style={{ textAlign: "center" }}
               >
+              Contact
+              </Typography>
+            </Grid>
+            <Grid item xs={1.5}>
+              <Typography
+                variant="h6"
+                component="div"
+                gutterBottom
+                style={{ marginLeft:"120px" }}
+              >
                 View
               </Typography>
             </Grid>
           </Grid>
-          {users&& users?.map((item,index) => {
+          {final&& final?.map((item,index) => {
             return (
               <div>
                 <Divider className="food_detail" />
@@ -178,12 +199,12 @@ Service              </Typography>
                   </Grid>
                   <Grid item xs={1.5}>
                     <Typography variant="body1" component="div" gutterBottom>
-                      {item && item.name}
+                      {item && item.BookedBy}
                     </Typography>
                   </Grid>
                   <Grid item xs={1.5}>
                     <Typography variant="body1" component="div" gutterBottom>
-                      {item && item.service}
+                      {item && item.RecievedBy}
                     </Typography>
                   </Grid>
                   
@@ -197,9 +218,15 @@ Service              </Typography>
                       {item && item.type}
                     </Typography>
                   </Grid>
-                  <Grid item xs={1.5}>
+                 
+                  {/* <Grid item xs={1.5}>
                     <Typography variant="body1" component="div" gutterBottom>
                       {item && item.date}
+                    </Typography>
+                  </Grid> */}
+                  <Grid item xs={1.5}>
+                    <Typography variant="body1" component="div" gutterBottom>
+                      {item && item.number}
                     </Typography>
                   </Grid>
                   <Grid item xs={1.5}>
@@ -217,8 +244,8 @@ Service              </Typography>
                       to={`/users/${item.id}`}
                       style={{ textDecoration: "none", color: "black" }}
                     >
-                      <Typography align="center">
-                        <Button variant="outlined" size="small">
+                      <Typography align="center" >
+                        <Button variant="outlined" size="small" >
                           View Detail
                         </Button>
                       </Typography>

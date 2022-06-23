@@ -34,11 +34,11 @@ const BookingDetails = () => {
   const [_open2, setOpen2] = useState(false);
   const [_open3, setOpen3] = useState(false);
   const [data, setData] = useState();
+  console.log("🚀 ~ file: BookingDeatils.js ~ line 37 ~ BookingDetails ~ data", data)
   const [fullName, setfullName] = useState();
   const [contact, setContact] = useState()
-  console.log("🚀 ~ file: UserDetails.js ~ line 36 ~ UserDetails ~ data", data)
-
   const { id } = params;
+
   // const user = userContent.find((user) => user.userName === userName);
   // const { userEmail, userImage } = user;
 
@@ -78,13 +78,13 @@ const BookingDetails = () => {
     if (id) {
       const handelFetch = async () => {
         // setLoading(true)
-        const docRef = doc(db, "users", id);
+        const docRef = doc(db, "Bookings", id);
         const docSnap = await getDoc(docRef);
+        console.log("🚀 ~ file: BookingDeatils.js ~ line 83 ~ handelFetch ~ docSnap", docSnap)
 
         if (docSnap.exists()) {
-          // console.log("Document data:", docSnap.data());
           setData(docSnap.data())
-          setfullName(docSnap.data().firstname)
+          setfullName(docSnap.data().name)
           setContact(docSnap.data().number)
         } else {
           console.log("No such document!");
@@ -99,7 +99,7 @@ const BookingDetails = () => {
 
   const updateUser = async () => {
     let data = {
-      firstname: fullName,
+      name: fullName,
       number: contact
     }
     await updateService("users", id, data)
@@ -182,7 +182,7 @@ const BookingDetails = () => {
         </Grid> */}
         <Grid item xs={12} sx={{ marginBottom: "20px", marginTop: "10px" }}>
           {/* <MultiTabs />*/}
-        </Grid> 
+        </Grid>
       </Grid>
       {/* <Modal
         open={_open}
@@ -250,7 +250,7 @@ const BookingDetails = () => {
         <Box sx={style2}>
 
           <div style={{ padding: "8px" }}>
-            <p> FullName</p>
+            <p> RecievedBy</p>
             <TextField
               id="standard-multiline-static"
               value={fullName}
@@ -279,8 +279,9 @@ const BookingDetails = () => {
             style={{
               float: "right",
               margin: "7px",
-              color: "white",
-              backgroundColor: "#E63369",
+              color: "black",
+              background: "#0980B0 ",
+
             }}
           >
             Update

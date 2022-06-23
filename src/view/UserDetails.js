@@ -35,7 +35,6 @@ const UserDetails = () => {
   const [data, setData] = useState();
   const [fullName, setfullName] = useState();
   const [contact, setContact] = useState()
-  console.log("🚀 ~ file: UserDetails.js ~ line 36 ~ UserDetails ~ data", data)
 
   const { id } = params;
   // const user = userContent.find((user) => user.userName === userName);
@@ -116,7 +115,7 @@ const UserDetails = () => {
         style={{
           marginTop: '10px',
           color: "black",
-          background:"#0980B0 ",
+          background: "#0980B0 ",
           borderRadius: "10px",
           marginRight: '10px'
 
@@ -130,7 +129,7 @@ const UserDetails = () => {
         style={{
           marginTop: '10px',
           color: "black",
-          background:"#0980B0 ",
+          background: "#0980B0 ",
           borderRadius: "10px",
           marginRight: '10px'
 
@@ -278,8 +277,8 @@ const UserDetails = () => {
             style={{
               float: "right",
               margin: "7px",
-              color: "white",
-              background:"rgb(232, 240, 254",
+              color: "black",
+              background: "#0980B0 ",
             }}
           >
             Update
