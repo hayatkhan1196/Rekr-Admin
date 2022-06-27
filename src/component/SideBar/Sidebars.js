@@ -9,7 +9,8 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Menues from "./Menues";
+import Menues from "../Menu/Menues";
+// import Menues from "./Menu/Menues";
 // import logo from "../assets/images/evolove_logo.png";
 
 const drawerWidth = 240;

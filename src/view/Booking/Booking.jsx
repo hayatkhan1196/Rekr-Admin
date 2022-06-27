@@ -1,41 +1,42 @@
 import React, { useState, useEffect } from "react";
-import Sidebars from "../component/Sidebars";
-import "../style/users.scss";
+import Sidebars from "../../component/SideBar/Sidebars";
+import "../../style/users.scss";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
 import Avatar from "@mui/material/Avatar";
 import Grid from "@mui/material/Grid";
 import { Link } from "react-router-dom";
-import { getService } from '../services/Services';
+import { getService } from '../../services/Services';
 
 const Booking = () => {
   const [users, setUsers] = useState([])
   const [booking, setBooking] = useState([])
-  const [final,setFinal]=useState([])
+  const [final, setFinal] = useState([])
+  console.log("🚀 ~ file: Booking.jsx ~ line 16 ~ Booking ~ final", final)
+  const getUsersAndBookingData = () => {
+    let array = []
+    booking.map((item) => {
+      users.map((user) => {
 
-  const getUsersAndBookingData=()=>{
-    let array=[]
-  booking.map((item)=>{
-    users.map((user)=>{
+        if (item.BookedBy == user.id) {
+          item.BookedBy = user.firstname
+          item.id = user.id
+          item.number = user.number
+          array.push(item)
 
-      if(item.BookedBy == user.id){
-           item.BookedBy =user.firstname
-           item.id=user.id
-           item.number=user.number
-     array.push( item)
+        }
+         if (item.RecievedBy == user.id) {
+          item.RecievedBy = user.firstname
+          item.id = user.id
+          item.number = user.number
+          array.push(item)
+        }
 
-      } else if(item.RecievedBy == user.id){
-        item.RecievedBy = user.firstname
-        item.id=user.id
-        item.number=user.number
-        array.push(item)
-      }
+      })
 
     })
-    
-  })
-  setFinal(array);
+    setFinal(array);
 
   }
 
@@ -52,26 +53,25 @@ const Booking = () => {
         ...doc.data()
       })
     });
-    setUsers(list1) 
-
+    setUsers(list1)
   };
 
   useEffect(() => {
-    
-    if(users && booking){
+
+    if (users && booking) {
       getUsersAndBookingData()
     }
-  }, [ users,booking])
+  }, [users, booking])
 
 
-  useEffect(() => { 
+  useEffect(() => {
     getAllUsers1()
     getAllBooking()
-   
+
   }, [])
 
-  
-let allList=[]
+
+  let allList = []
   let list = []
   const getAllBooking = async () => {
 
@@ -87,14 +87,14 @@ let allList=[]
     });
     list.map((item) => {
       item?.Bookings.map((subitems) => {
-       
-          allList.push(subitems)
+
+        allList.push(subitems)
       })
-      
+
     })
     setBooking(allList)
-   
-    
+
+
   };
 
   return (
@@ -104,28 +104,28 @@ let allList=[]
         <div className="order_head">
           <Typography variant="h6" component="div" gutterBottom>
             {" "}
-      BOOKING          </Typography>
+            BOOKING          </Typography>
         </div>
         <Divider sx={{ background: "#E63369" }} />
 
         <div style={{ padding: "25px" }}>
           <Grid container spacing={2}>
-           
+
             <Grid item xs={1.5}>
               <Typography variant="h6" component="div" gutterBottom>
-               Image
+                Image
               </Typography>
             </Grid>
             <Grid item xs={1.5}>
               <Typography variant="h6" component="div" gutterBottom>
-               BookedBy
+                BookedBy
               </Typography>
             </Grid>
             <Grid item xs={1.5}>
               <Typography variant="h6" component="div" gutterBottom>
-              RecievedBy             </Typography>
+                RecievedBy             </Typography>
             </Grid>
-      
+
             <Grid item xs={1.5}>
               <Typography
                 variant="h6"
@@ -133,7 +133,7 @@ let allList=[]
                 gutterBottom
                 style={{ textAlign: "center" }}
               >
-               Status
+                Status
               </Typography>
             </Grid>
             <Grid item xs={1.5}>
@@ -143,10 +143,10 @@ let allList=[]
                 gutterBottom
                 style={{ textAlign: "center" }}
               >
-            Type
+                Type
               </Typography>
             </Grid>
-            
+
             <Grid item xs={1.5}>
               <Typography
                 variant="h6"
@@ -154,7 +154,7 @@ let allList=[]
                 gutterBottom
                 style={{ textAlign: "center" }}
               >
-              Contact
+                Contact
               </Typography>
             </Grid>
             <Grid item xs={1.5}>
@@ -162,18 +162,18 @@ let allList=[]
                 variant="h6"
                 component="div"
                 gutterBottom
-                style={{ marginLeft:"120px" }}
+                style={{ marginLeft: "150px" }}
               >
                 View
               </Typography>
             </Grid>
           </Grid>
-          {final&& final?.map((item,index) => {
+          {final && final?.map((item, index) => {
             return (
               <div>
                 <Divider className="food_detail" />
                 <Grid container spacing={2} key={index}>
-                  
+
                   <Grid item xs={1.5}>
                     <span style={{ display: "flex", alignItems: "center" }}>
                       <Avatar
@@ -194,7 +194,7 @@ let allList=[]
                       {item && item.RecievedBy}
                     </Typography>
                   </Grid>
-                  
+
                   <Grid item xs={1.5}>
                     <Typography variant="body1" component="div" gutterBottom>
                       {item && item.status}
@@ -205,7 +205,7 @@ let allList=[]
                       {item && item.type}
                     </Typography>
                   </Grid>
-                 
+
                   {/* <Grid item xs={1.5}>
                     <Typography variant="body1" component="div" gutterBottom>
                       {item && item.date}
@@ -232,7 +232,7 @@ let allList=[]
                       style={{ textDecoration: "none", color: "black" }}
                     >
                       <Typography align="center" >
-                        <Button variant="outlined" size="small" >
+                        <Button variant="outlined" size="small" style={{ background: "#0980B0", color: "black" }} >
                           View Detail
                         </Button>
                       </Typography>

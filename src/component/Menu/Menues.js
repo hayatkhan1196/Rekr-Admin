@@ -7,7 +7,7 @@ import ListItemText from "@mui/material/ListItemText";
 import PrivacyTipRoundedIcon from "@mui/icons-material/PrivacyTipRounded";
 import GroupRoundedIcon from '@mui/icons-material/GroupRounded';
 import CampaignIcon from '@mui/icons-material/Campaign';
-import "../style/home.scss";
+import "../../style/home.scss";
 import NoteAltIcon from '@mui/icons-material/NoteAlt';
 import BookOnlineIcon from '@mui/icons-material/BookOnline';
 
@@ -34,7 +34,7 @@ const Menues = () => {
         >
           <ListItemButton className="menu_background">
             <ListItemIcon>
-              <GroupRoundedIcon sx={{ color: "black" }} />
+              <GroupRoundedIcon sx={{ color: "#0980B0"  }} />
             </ListItemIcon>
             <ListItemText primary="Users" style={{ color: "black" }} />
           </ListItemButton>
@@ -45,7 +45,7 @@ const Menues = () => {
         >
           <ListItemButton className="menu_background">
             <ListItemIcon>
-            <BookOnlineIcon sx={{ color: "black" }} />
+            <BookOnlineIcon sx={{ color: "#0980B0" }} />
             </ListItemIcon>
             <ListItemText primary="Booking" style={{ color: "black" }} />
           </ListItemButton>
@@ -56,7 +56,7 @@ const Menues = () => {
         >
           <ListItemButton className="menu_background">
             <ListItemIcon>
-              <CampaignIcon sx={{ color: "black" }} />
+              <CampaignIcon sx={{ color: "#0980B0" }} />
             </ListItemIcon>
             <ListItemText primary="Announcement" style={{ color: "black" }} />
           </ListItemButton>
@@ -67,7 +67,7 @@ const Menues = () => {
         >
           <ListItemButton className="menu_background">
             <ListItemIcon>
-              <PrivacyTipRoundedIcon sx={{ color: "black" }} />
+              <PrivacyTipRoundedIcon sx={{ color: "#0980B0" }} />
             </ListItemIcon>
             <ListItemText primary="Privacy Policy" style={{ color: "black" }} />
           </ListItemButton>
@@ -78,7 +78,7 @@ const Menues = () => {
         >
           <ListItemButton className="menu_background">
             <ListItemIcon>
-              <NoteAltIcon sx={{ color: "black" }} />
+              <NoteAltIcon sx={{ color: "#0980B0" }} />
             </ListItemIcon>
             <ListItemText primary="Terms & Conditions" style={{ color: "black" }} />
           </ListItemButton>

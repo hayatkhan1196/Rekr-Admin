@@ -4,7 +4,7 @@ import Divider from "@mui/material/Divider";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import SaveIcon from "@mui/icons-material/Save";
-import { postService } from "../services/Services";
+import { postService } from "../../services/Services";
 
 const AddPolicy = ({onClose}) => {
   const [AddPolicydescription, setAddPolicyDescription] = useState('')

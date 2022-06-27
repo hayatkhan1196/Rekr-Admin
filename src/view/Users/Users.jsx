@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import Sidebars from "../component/Sidebars";
-import "../style/users.scss";
+import Sidebars from "../../component/SideBar/Sidebars";
+import "../../style/users.scss";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
 import Avatar from "@mui/material/Avatar";
 import Grid from "@mui/material/Grid";
 import { Link } from "react-router-dom";
-import { getService } from '../services/Services';
+import { getService } from '../../services/Services';
 
 const Users = () => {
   const [users, setUsers] = useState([])
@@ -102,7 +102,7 @@ USERS          </Typography>
                   </Grid>
                   <Grid item xs={2.4}>
                     <Typography variant="body1" component="div" gutterBottom>
-                      {item && item.firstname}
+                      {item && item?.firstname}
                     </Typography>
                   </Grid>
                   <Grid item xs={2.4}>
@@ -126,7 +126,7 @@ USERS          </Typography>
                       style={{ textDecoration: "none", color: "black" }}
                     >
                       <Typography align="center">
-                        <Button variant="outlined" size="small" style={{background:"rgb(232, 240, 254",color:"black"}}>
+                        <Button variant="outlined" size="small" style={{background:"#0980B0",color:"black"}}>
                           View Detail
                         </Button>
                       </Typography>

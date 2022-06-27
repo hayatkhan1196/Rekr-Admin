@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import Sidebars from "../component/Sidebars";
-import "../style/privacyPolicy.scss";
-import _TermsAndConditions from "../assets/images/terms_and_conditions.png";
+import Sidebars from "../../component/SideBar/Sidebars";
+import "../../style/privacyPolicy.scss";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import _PrivacyPolicy from "../../assets/images/privacy_policy.png";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
-import AddTermsAndConditions from "../component/AddTermsAndConditions";
-import { getService } from '../services/Services';
+import AddPolicy from "../../component/AddPolicy/AddPolicy";
+import { getService } from '../../services/Services';
 
 const style = {
   position: "absolute",
@@ -22,15 +22,16 @@ const style = {
   borderRadius: 2,
 };
 
-const TermsAndConditions = () => {
+const PrivacyPolicy = () => {
   const [_open, setOpen] = useState(false);
   const _handleClose = () => setOpen(false);
   const handleOpen = () => setOpen(true);
-  const [termConditon, setTermConditon] = useState('')
-  let list = []
-  const getAllTermsAndCondition = async () => {
+  const [addPolicy, setAddPolicy] = useState('')
 
-    const querySnapshot = await getService("TermsAndCondition")
+  let list = []
+  const getAllPolicy = async () => {
+
+    const querySnapshot = await getService("AddPolicy")
 
     querySnapshot.forEach((doc) => {
 
@@ -42,7 +43,7 @@ const TermsAndConditions = () => {
     });
     list.map((item) => {
 
-      setTermConditon(item)
+      setAddPolicy(item)
 
     })
     // setLoading(false)
@@ -50,7 +51,7 @@ const TermsAndConditions = () => {
 
   useEffect(() => {
     // if(!openPopup){
-    getAllTermsAndCondition()
+    getAllPolicy()
     // }
   }, [])
   return (
@@ -58,25 +59,17 @@ const TermsAndConditions = () => {
       <Sidebars />
       <div className="privacy_policy">
         <img
-          src={_TermsAndConditions}
+          src={_PrivacyPolicy}
           alt="privacy policy"
           className="privacy_image"
         />
         <Typography
-          variant="h4"
-          component="div"
-          gutterBottom
-          sx={{ display: "flex", justifyContent: "center", color: "#E63369" }}
-        >
-          <strong>TERMS AND CONDITIONS</strong>
-        </Typography>
-        <Typography
           variant="body2"
           component="div"
           gutterBottom
-          style={{ padding: "0px 40px 20px 40px" }}
+          style={{ padding: "20px 40px 20px 40px" }}
         >
-          {termConditon && termConditon.termsAndConditionsDesc}
+          {addPolicy && addPolicy.descriptionName}
         </Typography>
         <Button
           variant="contained"
@@ -84,11 +77,11 @@ const TermsAndConditions = () => {
           style={{
             margin: "10px 0px 10px 40px",
             color: "black",
-            backgroundColor: "#E63369",
+            background: "#0980B0 ",
             borderRadius: "50px",
           }}
         >
-          Add New Terms and Conditions
+          Add New Policy
         </Button>
         <Modal
           open={_open}
@@ -97,7 +90,7 @@ const TermsAndConditions = () => {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <AddTermsAndConditions onClose={_handleClose} />
+            <AddPolicy onClose={_handleClose} />
           </Box>
         </Modal>
       </div>
@@ -105,4 +98,4 @@ const TermsAndConditions = () => {
   );
 };
 
-export default TermsAndConditions;
+export default PrivacyPolicy;

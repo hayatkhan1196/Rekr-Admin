@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Sidebars from "../component/Sidebars";
-import "../style/userDetail.scss";
+import Sidebars from "../../component/SideBar/Sidebars";
+import "../../style/userDetail.scss";
 import { useParams, } from "react-router-dom";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -18,11 +18,13 @@ import TextField from "@mui/material/TextField";
 import MoveDownIcon from '@mui/icons-material/MoveDown';
 import UpgradeIcon from '@mui/icons-material/Upgrade';
 import { doc, getDoc } from "firebase/firestore";
-import { getService, updateService } from '../services/Services';
-import { db } from "../config/firebase/firebase";
+import { deleteService, getService, updateService } from '../../services/Services';
+import { db } from "../../config/firebase/firebase";
+import { useNavigate } from "react-router-dom";
 
-const AnnouncementDetails = () => {
+const UserDetails = () => {
   const params = useParams();
+  const navigate = useNavigate();
   const _handleClose = () => setOpen(false);
   const handleOpen = () => setOpen(true);
   const _handleClose2 = () => setOpen2(false);
@@ -34,7 +36,7 @@ const AnnouncementDetails = () => {
   const [_open3, setOpen3] = useState(false);
   const [data, setData] = useState();
   const [fullName, setfullName] = useState();
-  const [title, setTitle] = useState()
+  const [contact, setContact] = useState()
 
   const { id } = params;
   // const user = userContent.find((user) => user.userName === userName);
@@ -67,23 +69,18 @@ const AnnouncementDetails = () => {
 
 
   useEffect(() => {
-    // if (typeof window !== 'undefined') {
-    //     const session = JSON.parse(localStorage.getItem('session'));
 
-    //     setUsersId(session.uid)
-    // }
     // declare the data fetching function
     if (id) {
       const handelFetch = async () => {
         // setLoading(true)
-        const docRef = doc(db, "Annoucements", id);
+        const docRef = doc(db, "users", id);
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
-          // console.log("Document data:", docSnap.data());
           setData(docSnap.data())
           setfullName(docSnap.data().firstname)
-          setTitle(docSnap.data().title)
+          setContact(docSnap.data().number)
         } else {
           console.log("No such document!");
         }
@@ -95,12 +92,18 @@ const AnnouncementDetails = () => {
     }
   }, [id])
 
+  const deleteUser = async () => {
+    await deleteService("users", id)
+    navigate(-1)
+  }
+
+
   const updateUser = async () => {
     let data = {
-        userName: fullName,
-      title: title
+      firstname: fullName,
+      number: contact
     }
-    await updateService("Annoucements", id, data)
+    await updateService("users", id, data)
     _handleClose3()
   }
 
@@ -126,6 +129,7 @@ const AnnouncementDetails = () => {
       <Button
         variant="contained"
         // onClick={handleOpen3}
+        onClick={deleteUser}
         style={{
           marginTop: '10px',
           color: "black",
@@ -154,12 +158,12 @@ const AnnouncementDetails = () => {
               <CardMedia
                 component="img"
                 height="200"
-                image={data && data.picture}
+                image={data && data.profilePicture}
                 alt="green iguana"
               />
               <CardContent>
                 <Typography gutterBottom variant="h6" component="div">
-                  {data && data.userName}
+                  {data && data.firstname}
                 </Typography>
                 <Typography gutterBottom variant="body1" component="div">
                   {data && data.firstname}
@@ -263,10 +267,10 @@ const AnnouncementDetails = () => {
 
             <TextField
               id="standard-multiline-static"
-              value={title}
+              value={contact}
               variant="outlined"
               fullWidth
-              onChange={(e) => setTitle(e.target.value)}
+              onChange={(e) => setContact(e.target.value)}
 
             />
           </div>
@@ -289,7 +293,7 @@ const AnnouncementDetails = () => {
   );
 };
 
-export default AnnouncementDetails;
+export default UserDetails;
 
 
 

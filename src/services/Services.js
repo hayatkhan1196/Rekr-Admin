@@ -10,11 +10,11 @@ export const getService = async (path) => {
    };
  
  
-   export const deleteService = async (path,id) => {
- 
-   return      await deleteDoc(doc(db, path, id));
- 
-   };
+   export const deleteService = async (path, id) => {
+
+    return await deleteDoc(doc(db, path, id));
+  
+  };
  
  
     export const updateService = async (path,id,data) => {

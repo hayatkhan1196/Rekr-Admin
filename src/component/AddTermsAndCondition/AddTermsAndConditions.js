@@ -4,7 +4,7 @@ import Divider from "@mui/material/Divider";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import SaveIcon from "@mui/icons-material/Save";
-import { postService } from "../services/Services";
+import { postService, postServiceById } from "../../services/Services";
 
 const AddTermsAndConditions = ({ onClose }) => {
   const [termConditon, setTermConditon] = useState('')
@@ -19,7 +19,7 @@ const AddTermsAndConditions = ({ onClose }) => {
       termsAndConditionsDesc: termConditon,
 
     };
-    await postService("TermsAndCondition", record)
+    await postServiceById("TermsAndCondition", record)
   }
 
   return (

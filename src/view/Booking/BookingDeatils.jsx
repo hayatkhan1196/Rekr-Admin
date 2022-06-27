@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Sidebars from "../component/Sidebars";
-import "../style/userDetail.scss";
+// import Sidebars from "../component/Sidebars";
+import "../../style/userDetail.scss";
 import { useParams, } from "react-router-dom";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -18,11 +18,16 @@ import TextField from "@mui/material/TextField";
 import MoveDownIcon from '@mui/icons-material/MoveDown';
 import UpgradeIcon from '@mui/icons-material/Upgrade';
 import { doc, getDoc } from "firebase/firestore";
-import { getService, updateService } from '../services/Services';
-import { db } from "../config/firebase/firebase";
+// import { getService, updateService } from '../services/Services';
+import { db } from "../../config/firebase/firebase";
+import { deleteService, updateService } from '../../services/Services';
+import Sidebars from '../../component/SideBar/Sidebars';
+import { useNavigate } from "react-router-dom";
 
 const BookingDetails = () => {
   const params = useParams();
+  const navigate = useNavigate();
+
   const _handleClose = () => setOpen(false);
   const handleOpen = () => setOpen(true);
   const _handleClose2 = () => setOpen2(false);
@@ -33,7 +38,6 @@ const BookingDetails = () => {
   const [_open2, setOpen2] = useState(false);
   const [_open3, setOpen3] = useState(false);
   const [data, setData] = useState();
-  console.log("🚀 ~ file: BookingDeatils.js ~ line 37 ~ BookingDetails ~ data", data)
   const [fullName, setfullName] = useState();
   const [contact, setContact] = useState()
   const { id } = params;
@@ -68,19 +72,13 @@ const BookingDetails = () => {
 
 
   useEffect(() => {
-    // if (typeof window !== 'undefined') {
-    //     const session = JSON.parse(localStorage.getItem('session'));
-
-    //     setUsersId(session.uid)
-    // }
+   
     // declare the data fetching function
     if (id) {
       const handelFetch = async () => {
         // setLoading(true)
         const docRef = doc(db, "Bookings", id);
         const docSnap = await getDoc(docRef);
-        console.log("🚀 ~ file: BookingDeatils.js ~ line 83 ~ handelFetch ~ docSnap", docSnap)
-
         if (docSnap.exists()) {
           setData(docSnap.data())
           setfullName(docSnap.data().name)
@@ -95,6 +93,15 @@ const BookingDetails = () => {
         .catch(console.error);
     }
   }, [id])
+
+
+  const deleteUser = async () => {
+    await deleteService("Bookings", id)
+    navigate(-1)
+  }
+
+
+
 
   const updateUser = async () => {
     let data = {
@@ -127,6 +134,7 @@ const BookingDetails = () => {
       <Button
         variant="contained"
         // onClick={handleOpen3}
+        onClick={deleteUser}
         style={{
           marginTop: '10px',
           color: "white",

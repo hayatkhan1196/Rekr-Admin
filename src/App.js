@@ -1,16 +1,16 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 // import Login from "./component/Login";
-import ProtectedRoute from "./component/ProtectedRoute";
-import PrivacyPolicy from "./view/PrivacyPolicy";
-import UserDetails from './view/UserDetails';
-import Users from './view/Users'
-import TermsAndConditions from './view/TermsAndConditions';
+import ProtectedRoute from "./component/ProtectedRoute/ProtectedRoute";
+import PrivacyPolicy from "./view/Privacy/PrivacyPolicy";
+import UserDetails from './view/Users/UserDetails';
+import Users from './view/Users/Users'
+import TermsAndConditions from './view/TermAndCondition/TermsAndConditions';
 import Login from "./Pages/Login/Login";
-import Booking from "./view/Booking";
-import BookingDetails from "./view/BookingDeatils";
-import Announcement from "./view/Announcement";
-import AnnouncementDetails from "./view/AnnouncementDetails";
+import Booking from "./view/Booking/Booking";
+import AnnouncementDetails from "./view/Announcement/AnnouncementDetails";
+import Announcement from './view/Announcement/Announcement';
+import BookingDetails from './view/Booking/BookingDeatils';
 function App() {
   return (
     <div>
@@ -25,8 +25,6 @@ function App() {
           <Route path="/Announcement" element={<Announcement />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
-    
-
         </Route>
       </Routes>
     </div>
