@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Sidebars from "../component/Sidebars";
 import "../style/users.scss";
-import { userContent } from "../component/UserData";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";

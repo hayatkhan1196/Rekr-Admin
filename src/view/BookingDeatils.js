@@ -8,7 +8,6 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import Grid from "@mui/material/Grid";
-import { userContent } from "../component/UserData";
 // import SalesBoard from "../component/SalesBoard";
 // import MultiTabs from "../component/multiTab/MultiTabs";
 import Button from "@mui/material/Button";

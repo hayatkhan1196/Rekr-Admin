@@ -9,6 +9,8 @@ import TermsAndConditions from './view/TermsAndConditions';
 import Login from "./Pages/Login/Login";
 import Booking from "./view/Booking";
 import BookingDetails from "./view/BookingDeatils";
+import Announcement from "./view/Announcement";
+import AnnouncementDetails from "./view/AnnouncementDetails";
 function App() {
   return (
     <div>
@@ -19,6 +21,8 @@ function App() {
           <Route path="/users" element={<Users />} />
           <Route path="/booking/:id" element={<BookingDetails />} />
           <Route path="/booking" element={<Booking />} />
+          <Route path="/announcement/:id" element={<AnnouncementDetails/>} />
+          <Route path="/Announcement" element={<Announcement />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
     

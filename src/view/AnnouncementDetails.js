@@ -20,7 +20,8 @@ import UpgradeIcon from '@mui/icons-material/Upgrade';
 import { doc, getDoc } from "firebase/firestore";
 import { getService, updateService } from '../services/Services';
 import { db } from "../config/firebase/firebase";
-const UserDetails = () => {
+
+const AnnouncementDetails = () => {
   const params = useParams();
   const _handleClose = () => setOpen(false);
   const handleOpen = () => setOpen(true);
@@ -33,7 +34,7 @@ const UserDetails = () => {
   const [_open3, setOpen3] = useState(false);
   const [data, setData] = useState();
   const [fullName, setfullName] = useState();
-  const [contact, setContact] = useState()
+  const [title, setTitle] = useState()
 
   const { id } = params;
   // const user = userContent.find((user) => user.userName === userName);
@@ -75,14 +76,14 @@ const UserDetails = () => {
     if (id) {
       const handelFetch = async () => {
         // setLoading(true)
-        const docRef = doc(db, "users", id);
+        const docRef = doc(db, "Annoucements", id);
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
           // console.log("Document data:", docSnap.data());
           setData(docSnap.data())
           setfullName(docSnap.data().firstname)
-          setContact(docSnap.data().number)
+          setTitle(docSnap.data().title)
         } else {
           console.log("No such document!");
         }
@@ -96,10 +97,10 @@ const UserDetails = () => {
 
   const updateUser = async () => {
     let data = {
-      firstname: fullName,
-      number: contact
+        userName: fullName,
+      title: title
     }
-    await updateService("users", id, data)
+    await updateService("Annoucements", id, data)
     _handleClose3()
   }
 
@@ -153,12 +154,12 @@ const UserDetails = () => {
               <CardMedia
                 component="img"
                 height="200"
-                image={data && data.profilePicture}
+                image={data && data.picture}
                 alt="green iguana"
               />
               <CardContent>
                 <Typography gutterBottom variant="h6" component="div">
-                  {data && data.firstname}
+                  {data && data.userName}
                 </Typography>
                 <Typography gutterBottom variant="body1" component="div">
                   {data && data.firstname}
@@ -262,10 +263,10 @@ const UserDetails = () => {
 
             <TextField
               id="standard-multiline-static"
-              value={contact}
+              value={title}
               variant="outlined"
               fullWidth
-              onChange={(e) => setContact(e.target.value)}
+              onChange={(e) => setTitle(e.target.value)}
 
             />
           </div>
@@ -288,7 +289,7 @@ const UserDetails = () => {
   );
 };
 
-export default UserDetails;
+export default AnnouncementDetails;
 
 
 

@@ -6,6 +6,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import PrivacyTipRoundedIcon from "@mui/icons-material/PrivacyTipRounded";
 import GroupRoundedIcon from '@mui/icons-material/GroupRounded';
+import CampaignIcon from '@mui/icons-material/Campaign';
 import "../style/home.scss";
 import NoteAltIcon from '@mui/icons-material/NoteAlt';
 import BookOnlineIcon from '@mui/icons-material/BookOnline';
@@ -26,6 +27,7 @@ const Menues = () => {
             <ListItemText primary="Dashboard" style={{ color: "#662483" }} />
           </ListItemButton>
         </Link> */}
+
         <Link
           to="/users"
           style={{ textDecoration: "none", color: "black" }}
@@ -48,7 +50,17 @@ const Menues = () => {
             <ListItemText primary="Booking" style={{ color: "black" }} />
           </ListItemButton>
         </Link>
-
+    <Link
+          to="/Announcement"
+          style={{ textDecoration: "none", color: "black" }}
+        >
+          <ListItemButton className="menu_background">
+            <ListItemIcon>
+              <CampaignIcon sx={{ color: "black" }} />
+            </ListItemIcon>
+            <ListItemText primary="Announcement" style={{ color: "black" }} />
+          </ListItemButton>
+        </Link>
         <Link
           to="/privacy-policy"
           style={{ textDecoration: "none", color: "black" }}
