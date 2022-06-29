@@ -13,7 +13,6 @@ const Booking = () => {
   const [users, setUsers] = useState([])
   const [booking, setBooking] = useState([])
   const [final, setFinal] = useState([])
-  console.log("🚀 ~ file: Booking.jsx ~ line 16 ~ Booking ~ final", final)
   const getUsersAndBookingData = () => {
     let array = []
     booking.map((item) => {
@@ -228,7 +227,7 @@ const Booking = () => {
                   </Grid>
                   <Grid item xs={1.5}>
                     <Link
-                      to={`/users/${item.id}`}
+                      to={`/booking/${item.id}`}
                       style={{ textDecoration: "none", color: "black" }}
                     >
                       <Typography align="center" >

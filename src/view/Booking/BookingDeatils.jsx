@@ -20,7 +20,7 @@ import UpgradeIcon from '@mui/icons-material/Upgrade';
 import { doc, getDoc } from "firebase/firestore";
 // import { getService, updateService } from '../services/Services';
 import { db } from "../../config/firebase/firebase";
-import { deleteService, updateService } from '../../services/Services';
+import { deleteService, getService, updateService } from '../../services/Services';
 import Sidebars from '../../component/SideBar/Sidebars';
 import { useNavigate } from "react-router-dom";
 
@@ -39,7 +39,7 @@ const BookingDetails = () => {
   const [_open3, setOpen3] = useState(false);
   const [data, setData] = useState();
   const [fullName, setfullName] = useState();
-  const [contact, setContact] = useState()
+  const [category,  SetCategory] = useState()
   const { id } = params;
 
   // const user = userContent.find((user) => user.userName === userName);
@@ -71,34 +71,73 @@ const BookingDetails = () => {
   };
 
 
-  useEffect(() => {
+  // useEffect(() => {
    
-    // declare the data fetching function
-    if (id) {
-      const handelFetch = async () => {
-        // setLoading(true)
-        const docRef = doc(db, "Bookings", id);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-          setData(docSnap.data())
-          setfullName(docSnap.data().name)
-          setContact(docSnap.data().number)
-        } else {
-          console.log("No such document!");
-        }
-      };
-      // call the function
-      handelFetch()
-        // make sure to catch any error
-        .catch(console.error);
-    }
-  }, [id])
+  //   // declare the data fetching function
+  //   if (id) {
+  //     const handelFetch = async () => {
+  //       // setLoading(true)
+  //       const docRef = doc(db, "Bookings", id);
+  //       const docSnap = await getDoc(docRef);
+  //       if (docSnap.exists()) {
+  //         docSnap.data().Bookings.map((item)=>{
+  //           setData(item)
+  //           setfullName(item.name)
+  //           SetCategory(item.type)
+  //         })
+         
+  //       } else {
+  //         console.log("No such document!");
+  //       }
+  //     };
+  //     // call the function
+  //     handelFetch()
+  //       // make sure to catch any error
+  //       .catch(console.error);
+  //   }
+  // }, [id])
 
 
-  const deleteUser = async () => {
-    await deleteService("Bookings", id)
-    navigate(-1)
-  }
+
+  // const deleteUser = async (id) => {
+  //   const docRef = doc(db, "Bookings",id);
+  //   const docSnap = await getDoc(docRef);
+    
+  //   if (docSnap.exists()) {
+  //     try{
+
+  //       let list = docSnap.data()
+  //      list = list.filter((i)=>i.id!== id);
+  //       await updateService("Bookings",id,list)
+          
+  //         const result = data?.filter((i)=>i.id!== id)
+  //         setData(result)
+          
+  //     }catch(error){
+        
+  //     alert("error occur")
+  //     }
+ 
+
+  //   } else {
+  //     console.log("No such document!");
+  //     // setLoading(false)
+  //   }        
+ 
+  // };
+
+
+
+
+
+
+
+
+
+  // const deleteUser = async () => {
+  //   await deleteService("Bookings", id)
+  //   navigate(-1)
+  // }
 
 
 
@@ -106,9 +145,9 @@ const BookingDetails = () => {
   const updateUser = async () => {
     let data = {
       name: fullName,
-      number: contact
+      type: category
     }
-    await updateService("users", id, data)
+    await updateService("Bookings", id, data)
     _handleClose3()
   }
 
@@ -116,14 +155,13 @@ const BookingDetails = () => {
     <div className="userDetails_div">
       <Sidebars />
 
-
       <Button
         variant="contained"
         onClick={handleOpen3}
         style={{
           marginTop: '10px',
-          color: "white",
-          backgroundColor: "#E63369",
+          color: "black",
+          background: "#0980B0 ",
           borderRadius: "10px",
           marginRight: '10px'
 
@@ -134,14 +172,13 @@ const BookingDetails = () => {
       <Button
         variant="contained"
         // onClick={handleOpen3}
-        onClick={deleteUser}
+        // onClick={deleteUser}
         style={{
           marginTop: '10px',
-          color: "white",
-          backgroundColor: "red",
+          color: "black",
+          background: "#0980B0 ",
           borderRadius: "10px",
           marginRight: '10px'
-
         }}
       >
         Delete Account
@@ -163,16 +200,16 @@ const BookingDetails = () => {
               <CardMedia
                 component="img"
                 height="200"
-                image={data && data.profilePicture}
+                image={data && data.photo}
                 alt="green iguana"
               />
               <CardContent>
                 <Typography gutterBottom variant="h6" component="div">
-                  {data && data.firstname}
+                  {data && data.name}
                 </Typography>
-                <Typography gutterBottom variant="body1" component="div">
-                  {data && data.firstname}
-                </Typography>
+                {/* <Typography gutterBottom variant="body1" component="div">
+                  {data && data.name}
+                </Typography> */}
               </CardContent>
             </CardActionArea>
           </Card>
@@ -188,66 +225,10 @@ const BookingDetails = () => {
           <SalesBoard />
         </Grid> */}
         <Grid item xs={12} sx={{ marginBottom: "20px", marginTop: "10px" }}>
-          {/* <MultiTabs />*/}
+         
         </Grid>
       </Grid>
-      {/* <Modal
-        open={_open}
-        onClose={_handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Box>
-            Current Subscription: <b>Free</b>
-          </Box>
-          Switch to <b>Paid</b> Subscription : <Switch color="secondary" />
-
-        </Box>
-      </Modal> */}
-      {/* <Modal
-        open={_open2}
-        onClose={_handleClose2}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style2}>
-          <Typography gutterBottom variant="body1" component="div">
-            <b>Bank Account No:</b>  {'09989898-8988989898'}
-          </Typography>
-          <Typography gutterBottom variant="body1" component="div">
-            <b>Bank Name:</b> {'Bank of Moscow'}
-          </Typography>
-          <Typography gutterBottom variant="body1" component="div">
-            <b>Account Title:</b> {'Mr Fritz'}
-          </Typography>
-          <Typography gutterBottom variant="body1" component="div">
-            <b>IBAN:</b> {'RS8H827942984840284028'}
-          </Typography>
-          <div style={{ padding: "8px" }}>
-
-            <TextField
-              id="standard-multiline-static"
-              placeholder="Transfer Amount"
-              variant="outlined"
-              fullWidth
-
-            />
-          </div>
-          <Button
-            variant="contained"
-            startIcon={<MoveDownIcon />}
-            style={{
-              float: "right",
-              margin: "7px",
-              color: "white",
-              backgroundColor: "#E63369",
-            }}
-          >
-            Make Transfer
-          </Button>
-        </Box>
-      </Modal> */}
+     
       <Modal
         open={_open3}
         onClose={_handleClose3}
@@ -268,14 +249,14 @@ const BookingDetails = () => {
             />
           </div>
           <div style={{ padding: "8px" }}>
-            <p> Contact</p>
+            <p> Type</p>
 
             <TextField
               id="standard-multiline-static"
-              value={contact}
+              value={category}
               variant="outlined"
               fullWidth
-              onChange={(e) => setContact(e.target.value)}
+              onChange={(e) => SetCategory(e.target.value)}
 
             />
           </div>

@@ -138,7 +138,7 @@ const Announcement = () => {
 
                                     <Grid item xs={2}>
                                         <Link
-                                            to={`/users/${item.userId}`}
+                                            to={`/announcement/${item.id}`}
                                             style={{ textDecoration: "none", color: "black" }}
                                         >
                                             <Typography align="center">

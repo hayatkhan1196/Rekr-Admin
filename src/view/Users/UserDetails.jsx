@@ -110,8 +110,6 @@ const UserDetails = () => {
   return (
     <div className="userDetails_div">
       <Sidebars />
-
-
       <Button
         variant="contained"
         onClick={handleOpen3}
