@@ -76,9 +76,6 @@ const Notification = () => {
                 list = list.filter((i) => i.userId !== id);
                 setNotification(list)
 
-                // const result = list.filter((item) => item.userId !== id)
-                // setNotification(result)
-
             } catch (error) {
                 console.log("error occur");
             }
@@ -95,7 +92,8 @@ const Notification = () => {
                 <div className="order_head">
                     <Typography variant="h6" component="div" gutterBottom>
                         {" "}
-                        NOTIFICATIONS          </Typography>
+                        NOTIFICATIONS          
+                        </Typography>
                 </div>
                 <Divider sx={{ background: "#E63369" }} />
 
@@ -146,7 +144,6 @@ const Notification = () => {
 
                         if (typeof dateAndTime === 'object' && dateAndTime !== null && 'toString' in dateAndTime) {
                             result = dateAndTime.toString();
-
                         }
 
                         return (
