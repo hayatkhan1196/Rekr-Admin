@@ -8,6 +8,7 @@ import PrivacyTipRoundedIcon from "@mui/icons-material/PrivacyTipRounded";
 import GroupRoundedIcon from '@mui/icons-material/GroupRounded';
 import CampaignIcon from '@mui/icons-material/Campaign';
 import "../../style/home.scss";
+import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import CategoryIcon from '@mui/icons-material/Category';
 import NoteAltIcon from '@mui/icons-material/NoteAlt';
 import BookOnlineIcon from '@mui/icons-material/BookOnline';
@@ -68,6 +69,18 @@ const Menues = () => {
         </Link>
 
         <Link
+          to="/Notification"
+          style={{ textDecoration: "none", color: "black" }}
+        >
+          <ListItemButton className="menu_background">
+            <ListItemIcon>
+              <NotificationsActiveIcon sx={{ color: "#0980B0" }} />
+            </ListItemIcon>
+            <ListItemText primary="Notifications" style={{ color: "black" }} />
+          </ListItemButton>
+        </Link>
+
+        <Link
           to="/privacy-policy"
           style={{ textDecoration: "none", color: "black" }}
         >
@@ -89,9 +102,6 @@ const Menues = () => {
             <ListItemText primary="Terms & Conditions" style={{ color: "black" }} />
           </ListItemButton>
         </Link>
-
-
-
       </List>
     </div>
   );

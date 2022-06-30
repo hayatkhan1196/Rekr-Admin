@@ -35,12 +35,10 @@ const CategoryDetails = () => {
     const [_open2, setOpen2] = useState(false);
     const [_open3, setOpen3] = useState(false);
     const [data, setData] = useState();
-    console.log("🚀 ~ file: CatergoryDetails.js ~ line 38 ~ CategoryDetails ~ data", data)
     const [categoryName, setcategoryName] = useState();
     const [description, setDescription] = useState()
 
     const { id } = params;
-    console.log("🚀 ~ file: CatergoryDetails.js ~ line 42 ~ CategoryDetails ~ id", id)
     // const user = userContent.find((user) => user.userName === userName);
     // const { userEmail, userImage } = user;
 

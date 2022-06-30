@@ -12,6 +12,7 @@ import Announcement from './view/Announcement/Announcement';
 import BookingDetails from './view/Booking/BookingDeatils';
 import AddCategory from "./view/AddCategory/addCategory";
 import CategoryDetails from "./view/AddCategory/CatergoryDetails";
+import Notification from "./view/Notifications/Notification";
 function App() {
   return (
     <div>
@@ -26,6 +27,7 @@ function App() {
           <Route path="/Announcement" element={<Announcement />} />
           <Route path="/catergory" element={<AddCategory />} />
           <Route path="/CategoryDetails/:id" element={<CategoryDetails />} />
+          <Route path="/Notification" element={<Notification />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
         </Route>
