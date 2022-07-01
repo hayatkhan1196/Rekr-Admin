@@ -71,61 +71,105 @@ const BookingDetails = () => {
   };
 
 
-  // useEffect(() => {
+  useEffect(() => {
    
-  //   // declare the data fetching function
-  //   if (id) {
-  //     const handelFetch = async () => {
-  //       // setLoading(true)
-  //       const docRef = doc(db, "Bookings", id);
-  //       const docSnap = await getDoc(docRef);
-  //       if (docSnap.exists()) {
-  //         docSnap.data().Bookings.map((item)=>{
-  //           setData(item)
-  //           setfullName(item.name)
-  //           SetCategory(item.type)
-  //         })
+    // declare the data fetching function
+    if (id) {
+      const handelFetch = async () => {
+        // setLoading(true)
+        const docRef = doc(db, "Bookings", id);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          docSnap.data().Bookings.map((item)=>{
+            setData(item)
+            setfullName(item.name)
+            SetCategory(item.type)
+          })
          
-  //       } else {
-  //         console.log("No such document!");
-  //       }
-  //     };
-  //     // call the function
-  //     handelFetch()
-  //       // make sure to catch any error
-  //       .catch(console.error);
-  //   }
-  // }, [id])
+        } else {
+          console.log("No such document!");
+        }
+      };
+      // call the function
+      handelFetch()
+        // make sure to catch any error
+        .catch(console.error);
+    }
+  }, [id])
 
 
 
-  // const deleteUser = async (id) => {
-  //   const docRef = doc(db, "Bookings",id);
-  //   const docSnap = await getDoc(docRef);
-    
-  //   if (docSnap.exists()) {
-  //     try{
+  const deleteUser = async (docId,id,) => {
+   
+    const docRef = doc(db, "Bookings",id);
+     const docSnap = await getDoc(docRef);
+    let bookingData = docSnap.data()
+    const updatedDate = bookingData.Bookings.filter((item) => item.docId !== docId)
+  let objectDate = {
+    Bookings: updatedDate
 
-  //       let list = docSnap.data()
-  //      list = list.filter((i)=>i.id!== id);
-  //       await updateService("Bookings",id,list)
+    }
+    updateService("Bookings", id, objectDate)
+   
+  if (data) {
+    try {
+          let list = data
+          let objectList = Object.values(list)
+          list = objectList.filter((i) => i.docId !== docId);
+          setData(list)
+          navigate(-1)
+        } catch (error) {
+          console.log("error occur");
+      }
+  } else {
+      console.log("No such document!");
+      // setLoading(false)
+  }
+ 
+  
+    // if (docSnap.exists()) {
+    //   try{
+
+    //     let list = docSnap.data()
+    //    list = list.filter((i)=>i.id!== id);
+    //     await updateService("Bookings",id,list)
           
-  //         const result = data?.filter((i)=>i.id!== id)
-  //         setData(result)
+    //       const result = data?.filter((i)=>i.id!== id)
+    //       setData(result)
           
-  //     }catch(error){
+    //   }catch(error){
         
-  //     alert("error occur")
-  //     }
+    //   alert("error occur")
+    //   }
  
 
-  //   } else {
+    // } else {
+    //   console.log("No such document!");
+    //   // setLoading(false)
+    // }        
+
+
+
+
+
+  //   if (docSnap.exists()) {
+  //     try {
+
+  //         let list = docSnap.data()
+  //         console.log("🚀 ~ file: BookingDeatils.jsx ~ line 136 ~ deleteUser ~ list", list)
+  //         list = list.filter((i) => i.docId !== id);
+  //         console.log("=======================>", list)
+  //         setData(list)
+
+  //     } catch (error) {
+  //         console.log("error occur");
+  //     }
+  // } else {
   //     console.log("No such document!");
   //     // setLoading(false)
-  //   }        
+  // }
+};
  
-  // };
-
 
 
 
@@ -143,11 +187,11 @@ const BookingDetails = () => {
 
 
   const updateUser = async () => {
-    let data = {
+    let data1 = {
       name: fullName,
       type: category
     }
-    await updateService("Bookings", id, data)
+    await updateService("Bookings", id, data1)
     _handleClose3()
   }
 
@@ -172,7 +216,7 @@ const BookingDetails = () => {
       <Button
         variant="contained"
         // onClick={handleOpen3}
-        // onClick={deleteUser}
+         onClick={(()=>{deleteUser(data.docId,id)})}
         style={{
           marginTop: '10px',
           color: "black",

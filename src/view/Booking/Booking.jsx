@@ -20,14 +20,12 @@ const Booking = () => {
 
         if (item.BookedBy == user.id) {
           item.BookedBy = user.firstname
-          item.id = user.id
           item.number = user.number
           array.push(item)
 
         }
          if (item.RecievedBy == user.id) {
           item.RecievedBy = user.firstname
-          item.id = user.id
           item.number = user.number
           array.push(item)
         }
@@ -86,7 +84,7 @@ const Booking = () => {
     });
     list.map((item) => {
       item?.Bookings.map((subitems) => {
-
+subitems.parenId =item.id
         allList.push(subitems)
       })
 
@@ -227,7 +225,7 @@ const Booking = () => {
                   </Grid>
                   <Grid item xs={1.5}>
                     <Link
-                      to={`/booking/${item.id}`}
+                      to={`/booking/${item.parenId}`}
                       style={{ textDecoration: "none", color: "black" }}
                     >
                       <Typography align="center" >

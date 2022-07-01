@@ -92,10 +92,10 @@ const UserDetails = () => {
     }
   }, [id])
 
-  const deleteUser = async () => {
-    await deleteService("users", id)
-    navigate(-1)
-  }
+  // const deleteUser = async () => {
+  //   await deleteService("users", id)
+  //   navigate(-1)
+  // }
 
 
   const updateUser = async () => {
@@ -124,7 +124,7 @@ const UserDetails = () => {
       >
         Manage Details
       </Button>
-      <Button
+      {/* <Button
         variant="contained"
         // onClick={handleOpen3}
         onClick={deleteUser}
@@ -138,7 +138,7 @@ const UserDetails = () => {
         }}
       >
         Delete Account
-      </Button>
+      </Button> */}
       <Grid container spacing={{ xs: 1, sm: 1, md: 3, lg: 3 }}>
         <Grid
           item
