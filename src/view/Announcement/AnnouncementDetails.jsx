@@ -33,6 +33,7 @@ const AnnouncementDetails = () => {
   const [_open2, setOpen2] = useState(false);
   const [_open3, setOpen3] = useState(false);
   const [data, setData] = useState();
+
   const [fullName, setfullName] = useState();
   const [title, setTitle] = useState()
 
@@ -67,11 +68,7 @@ const AnnouncementDetails = () => {
 
 
   useEffect(() => {
-    // if (typeof window !== 'undefined') {
-    //     const session = JSON.parse(localStorage.getItem('session'));
 
-    //     setUsersId(session.uid)
-    // }
     // declare the data fetching function
     if (id) {
       const handelFetch = async () => {
@@ -80,10 +77,9 @@ const AnnouncementDetails = () => {
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
-          // console.log("Document data:", docSnap.data());
           setData(docSnap.data())
-          setfullName(docSnap.data().firstname)
-          setTitle(docSnap.data().title)
+          // setfullName(docSnap.data().firstname)
+          // setTitle(docSnap.data().title)
         } else {
           console.log("No such document!");
         }
@@ -95,14 +91,52 @@ const AnnouncementDetails = () => {
     }
   }, [id])
 
-  const updateUser = async () => {
-    let data = {
-        userName: fullName,
-      title: title
+
+  const deleteUser = async (userId, id) => {
+
+    const docRef = doc(db, "Annoucements", id);
+    const docSnap = await getDoc(docRef);
+    let announcementData = docSnap.data();
+
+
+    const arrayOfObj = Object.entries(announcementData).map((e) => ({ [e[0]]: e[1] }));
+    const updatedDate = arrayOfObj.filter((item) => item.userId !== userId)
+    let objectDate = {
+      responces: updatedDate
+
     }
-    await updateService("Annoucements", id, data)
-    _handleClose3()
-  }
+    updateService("Annoucements", id, objectDate)
+
+    if (data) {
+      try {
+
+        let list = data
+        let listData = Object.values(list)
+        list = listData.filter((i) => i.userId !== userId);
+        setData(list)
+
+      } catch (error) {
+        console.log("error occur");
+      }
+    } else {
+      console.log("No such document!");
+      // setLoading(false)
+    }
+  };
+
+
+
+
+
+
+  // const updateUser = async () => {
+  //   let data = {
+  //       userName: fullName,
+  //       title: title
+  //   }
+  //   await updateService("Annoucements", id, data)
+  //   _handleClose3()
+  // }
 
   return (
     <div className="userDetails_div">
@@ -125,7 +159,7 @@ const AnnouncementDetails = () => {
       </Button>
       <Button
         variant="contained"
-        // onClick={handleOpen3}
+        onClick={(() => { deleteUser(data.userId, id) })}
         style={{
           marginTop: '10px',
           color: "black",
@@ -170,75 +204,11 @@ const AnnouncementDetails = () => {
 
         </Grid>
 
-        {/* <Grid
-          item
-          sm={12}
-          md={9}
-          sx={{ marginBottom: "20px", marginTop: "10px" }}
-        >
-          <SalesBoard />
-        </Grid> */}
         <Grid item xs={12} sx={{ marginBottom: "20px", marginTop: "10px" }}>
-          {/* <MultiTabs /> */}
+
         </Grid>
       </Grid>
-      {/* <Modal
-        open={_open}
-        onClose={_handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Box>
-            Current Subscription: <b>Free</b>
-          </Box>
-          Switch to <b>Paid</b> Subscription : <Switch color="secondary" />
 
-        </Box>
-      </Modal> */}
-      {/* <Modal
-        open={_open2}
-        onClose={_handleClose2}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style2}>
-          <Typography gutterBottom variant="body1" component="div">
-            <b>Bank Account No:</b>  {'09989898-8988989898'}
-          </Typography>
-          <Typography gutterBottom variant="body1" component="div">
-            <b>Bank Name:</b> {'Bank of Moscow'}
-          </Typography>
-          <Typography gutterBottom variant="body1" component="div">
-            <b>Account Title:</b> {'Mr Fritz'}
-          </Typography>
-          <Typography gutterBottom variant="body1" component="div">
-            <b>IBAN:</b> {'RS8H827942984840284028'}
-          </Typography>
-          <div style={{ padding: "8px" }}>
-
-            <TextField
-              id="standard-multiline-static"
-              placeholder="Transfer Amount"
-              variant="outlined"
-              fullWidth
-
-            />
-          </div>
-          <Button
-            variant="contained"
-            startIcon={<MoveDownIcon />}
-            style={{
-              float: "right",
-              margin: "7px",
-              color: "white",
-              backgroundColor: "#E63369",
-            }}
-          >
-            Make Transfer
-          </Button>
-        </Box>
-      </Modal> */}
       <Modal
         open={_open3}
         onClose={_handleClose3}
@@ -272,7 +242,7 @@ const AnnouncementDetails = () => {
           </div>
           <Button
             variant="contained"
-            onClick={updateUser}
+            // onClick={updateUser}
             startIcon={<UpgradeIcon />}
             style={{
               float: "right",

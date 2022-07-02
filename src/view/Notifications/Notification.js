@@ -14,7 +14,6 @@ import { db } from "../../config/firebase/firebase";
 
 const Notification = () => {
     const [notification, setNotification] = useState([])
-    console.log("🚀 ~ file: Notification.js ~ line 17 ~ Notification ~ notification", notification)
     const navigate = useNavigate();
 
 
